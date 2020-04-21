@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'notoSerifBoldItalic';
+    src: url('/src/fonts/NotoSerif-BoldItalic.ttf') ;
+}
+@font-face {
+    font-family: 'notoSerifBold';
+    src: url('/src/fonts/NotoSerif-Bold.ttf') ;
+}
+@font-face {
+    font-family: 'notoSerifItalic';
+    src: url('/src/fonts/NotoSerif-Italic.ttf') ;
+}
+@font-face {
+    font-family: 'notoSerifRegular';
+    src: url('/src/fonts/NotoSerif-Regular.ttf') ;
+}
+@font-face {
+    font-family: 'robotoRegular';
+    src: url('/src/fonts/Roboto-Regular.ttf') ;
+}
+@font-face {
+    font-family: 'robotoLight';
+    src: url('/src/fonts/Roboto-Light.ttf') ;
+}
+.newsCard1{
+    margin:5px;
+    padding:5px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 0px grey;
+    -webkit-transition:  box-shadow .6s ease-out;
+    box-shadow: .8px .9px 3px grey;
+}
+h2{
+    font-family:'notoSerifRegular';
+    margin-block-start: 0;
+}
+.footer{
+    display: flex;
+    flex-direction: column;
+
+}
+.footerRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+.comments{
+    display: flex;
+    flex-direction: row;
+}
+.alignTextLeft{
+    text-align: start;
+}
+
+.newsCard1:hover{
+    background-color: cornflowerblue;
+    box-shadow: 1px 8px 20px grey;
+    -webkit-transition:  box-shadow .6s ease-in;
+}
