@@ -12,9 +12,10 @@ class HomePage extends React.Component {
             count2: 1,
         };
     }
-
+    // https://hacker-times.s3-us-west-1.amazonaws.com/${category}dayStories
     componentDidMount() {
-        fetch('https://hacker-times.s3-us-west-1.amazonaws.com/topStories')
+        // fetch('https://cors-anywhere.herokuapp.com/https://hacker-times.s3-us-west-1.amazonaws.com/0dayStories')
+         fetch('https://hacker-times.s3-us-west-1.amazonaws.com/topStories')
             .then(res => res.json())
             .then(data => {
                 console.log(data.top);
@@ -25,7 +26,50 @@ class HomePage extends React.Component {
 
             });
     }
+     getTabName(dayNumber) {
+        var daysOfWeek=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+        daysOfWeek.reverse();
+        var today = new Date().getDay();
+        let daysArray=[];
+        for(let i=today;i<=7;i++){
+            daysArray.push(i);
+        }
+        for(let i=1;i<today;i++){
+            daysArray.push(i);
+        }
 
+        let tabList=[];
+        for(let i=0;i<daysArray.length;i++){
+            tabList.push(daysOfWeek[daysArray[i]-1]);
+        }
+        return tabList[dayNumber];
+    }
+  fetchNthDayStories(day){
+        if(day==0){
+            fetch('https://hacker-times.s3-us-west-1.amazonaws.com/topStories')
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data.top);
+                    this.setState({
+                        isLoaded: true,
+                        items: data.top,
+                    });
+
+                });
+        }else{
+            fetch('https://cors-anywhere.herokuapp.com/https://hacker-times.s3-us-west-1.amazonaws.com/'+day+'dayStories')
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data.top);
+                    this.setState({
+                        isLoaded: true,
+                        items: data.top,
+                    });
+
+                });
+        }
+
+  }
     render() {
 
         if (!this.state.isLoaded) {
@@ -37,13 +81,14 @@ class HomePage extends React.Component {
                         <h1 className="title">The McLaren Times </h1>
                     </div>
                     <div className="Tabs">
-                        <a className="tab">Latest</a>
-                        <a className="tab">Yesterday</a>
-                        <a className="tab">Sunday</a>
-                        <a className="tab">Monday</a>
-                        <a className="tab">Tuesday</a>
-                        <a className="tab">Wednesday</a>
-                        <a className="tab">Thursday</a>
+
+                        <button className="tab" onClick={()=>this.fetchNthDayStories(0)}>Today</button>
+                        <button className="tab" onClick={()=>this.fetchNthDayStories(1)}>Yesterday</button>
+                        <button className="tab" onClick={()=>this.fetchNthDayStories(2)}>{this.getTabName(2)}</button>
+                        <button className="tab" onClick={()=>this.fetchNthDayStories(3)}>{this.getTabName(3)}</button>
+                        <button className="tab" onClick={()=>this.fetchNthDayStories(4)}>{this.getTabName(4)}</button>
+                        <button className="tab" onClick={()=>this.fetchNthDayStories(5)}>{this.getTabName(5)}</button>
+                        <button className="tab" onClick={()=>this.fetchNthDayStories(6)}>{this.getTabName(6)}</button>
                     </div>
                    <NewsCardGrid items={this.state.items}/>
 

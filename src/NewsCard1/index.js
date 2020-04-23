@@ -2,12 +2,23 @@ import React from "react";
 import "./styles1.css";
 
 class NewsCard extends React.Component {
-    calculateTime(input) {
+     calculateTime(input) {
         var date = new Date();
-        var timestamp = Math.floor((date.getTime()) / 1000);
-        var diff = timestamp - input;
-        return (Math.floor(diff / 3600));
-
+        var currentTimestamp = Math.floor(date.getTime() / 1000);
+        var seconds = currentTimestamp - input - 13.5 * 3600;
+        var d = Math.floor(seconds / (3600 * 24));
+        var h = Math.floor((seconds % (3600 * 24)) / 3600);
+        var m = Math.floor((seconds % 3600) / 60);
+        // var s = Math.floor(seconds % 60);
+        var dDisplay = d > 0 ? d +'d':'';
+        var hDisplay = h > 0 ? h +'h':'';
+        var mDisplay = m > 0 ? m +'m':'';
+        if(dDisplay!==""){
+            return dDisplay + hDisplay;
+        }
+        else if(dDisplay===""){
+            return hDisplay + mDisplay;
+        }
     }
 
     getURL(url) {
@@ -37,7 +48,7 @@ class NewsCard extends React.Component {
     render() {
         return (
             <div className="newsCard1" >
-                <img src={this.props.newsItem.htImage}/>
+                {this.props.newsItem.htImage!==undefined && <img src={this.props.newsItem.htImage} alt=""/>}
                 <h2>{this.props.newsItem.title}</h2>
                 <div>
                     {this.truncateString(this.props.newsItem.htDescription)}
@@ -54,7 +65,7 @@ class NewsCard extends React.Component {
                             <div>{this.props.newsItem.comments === undefined ? 0 : this.props.newsItem.comments} comments</div>
                         </div>
                         <div>
-                            {this.props.newsItem.score} points {this.calculateTime(this.props.newsItem.time)}hr ago
+                            {this.props.newsItem.score} points {this.calculateTime(this.props.newsItem.time)} ago
                         </div>
                     </div>
                 </div>

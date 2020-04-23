@@ -4,10 +4,21 @@ import "./styles3.css";
 class NewsCard3 extends React.Component {
     calculateTime(input) {
         var date = new Date();
-        var timestamp = Math.floor((date.getTime()) / 1000);
-        var diff = timestamp - input;
-        return (Math.floor(diff / 3600));
-
+        var currentTimestamp = Math.floor(date.getTime() / 1000);
+        var seconds = currentTimestamp - input - 13.5 * 3600;
+        var d = Math.floor(seconds / (3600 * 24));
+        var h = Math.floor((seconds % (3600 * 24)) / 3600);
+        var m = Math.floor((seconds % 3600) / 60);
+        // var s = Math.floor(seconds % 60);
+        var dDisplay = d > 0 ? d +'d':'';
+        var hDisplay = h > 0 ? h +'h':'';
+        var mDisplay = m > 0 ? m +'m':'';
+        if(dDisplay!==""){
+            return dDisplay + hDisplay;
+        }
+        else if(dDisplay===""){
+            return hDisplay + mDisplay;
+        }
     }
 
     getURL(url) {
@@ -34,31 +45,34 @@ class NewsCard3 extends React.Component {
     }
 
     render() {
-        return (
-            <div className="newsCard3" >
-                <img className="newsCard3Image" src={this.props.newsItem.htImage}/>
-                <div className="newsCard3TextSection">
-                    <h3> {this.props.newsItem.title}</h3>
-                    <p>{this.truncateString(this.props.newsItem.htDescription)}</p>
-                    <div className="footer">
-                        <a className="alignTextLeft" href={this.props.newsItem.url}>Source</a>
-                        <div className="footerRow">
-                            <div className="comments">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-                                    <path
-                                        d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
-                                    <path d="M0 0h24v24H0z" fill="none"/>
-                                </svg>
-                                <div>{this.props.newsItem.comments === undefined ? 0 : this.props.newsItem.comments} comments</div>
-                            </div>
-                            <div>
-                                {this.props.newsItem.score} points {this.calculateTime(this.props.newsItem.time)}hr ago
+        if(this.props.newsItem!==undefined){
+            return (
+                <div className="newsCard3" >
+                    {this.props.newsItem.htImage!==undefined && <img className="newsCard3Image" src={this.props.newsItem.htImage} alt="" />}
+                    <div className="newsCard3TextSection">
+                        <h3> {this.props.newsItem.title}</h3>
+                        <p>{this.truncateString(this.props.newsItem.htDescription)}</p>
+                        <div className="footer">
+                            <a className="alignTextLeft" href={this.props.newsItem.url}>Source</a>
+                            <div className="footerRow">
+                                <div className="comments">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                        <path
+                                            d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                                        <path d="M0 0h24v24H0z" fill="none"/>
+                                    </svg>
+                                    <div>{this.props.newsItem.comments === undefined ? 0 : this.props.newsItem.comments} comments</div>
+                                </div>
+                                <div>
+                                    {this.props.newsItem.score} points {this.calculateTime(this.props.newsItem.time)} ago
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
+
     }
 }
 
