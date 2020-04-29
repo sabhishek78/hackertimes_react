@@ -27,4 +27,7 @@ p{
     box-shadow: 1px 8px 20px grey;
     -webkit-transition:  box-shadow .6s ease-in;
 }
+.textAndImageNC2{
+    margin-bottom:8px;
+}
 

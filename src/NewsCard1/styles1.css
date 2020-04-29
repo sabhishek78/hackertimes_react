@@ -1,27 +1,4 @@
-@font-face {
-    font-family: 'notoSerifBoldItalic';
-    src: url('/src/fonts/NotoSerif-BoldItalic.ttf') ;
-}
-@font-face {
-    font-family: 'notoSerifBold';
-    src: url('/src/fonts/NotoSerif-Bold.ttf') ;
-}
-@font-face {
-    font-family: 'notoSerifItalic';
-    src: url('/src/fonts/NotoSerif-Italic.ttf') ;
-}
-@font-face {
-    font-family: 'notoSerifRegular';
-    src: url('/src/fonts/NotoSerif-Regular.ttf') ;
-}
-@font-face {
-    font-family: 'robotoRegular';
-    src: url('/src/fonts/Roboto-Regular.ttf') ;
-}
-@font-face {
-    font-family: 'robotoLight';
-    src: url('/src/fonts/Roboto-Light.ttf') ;
-}
+
 .newsCard1{
     margin:5px;
     padding:5px;
@@ -32,11 +9,12 @@
     box-shadow: .8px .9px 3px grey;
 }
 h2{
-    font-family:'notoSerifRegular';
+
     margin-block-start: 0;
 }
 .footer{
     display: flex;
+    margin-top:8px;
     flex-direction: column;
 
 }

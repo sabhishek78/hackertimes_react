@@ -11,7 +11,7 @@ class NewsCardGrid extends React.Component {
             <div>
                 <div className="row1">
                     <div id="left-col">
-                        {this.props.items[0]!==undefined&&<NewsCard newsItem={this.props.items[0]}/>}
+                        {this.props.popularStory!==undefined&&<NewsCard newsItem={this.props.popularStory}/>}
                     </div>
                     <div id="middle-col">
                         {this.props.items[1]!==undefined&&<NewsCard2 newsItem={this.props.items[1]}/>}

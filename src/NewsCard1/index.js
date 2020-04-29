@@ -1,11 +1,12 @@
 import React from "react";
 import "./styles1.css";
+import Truncate from 'react-truncate';
 
 class NewsCard extends React.Component {
      calculateTime(input) {
         var date = new Date();
         var currentTimestamp = Math.floor(date.getTime() / 1000);
-        var seconds = currentTimestamp - input - 13.5 * 3600;
+        var seconds = currentTimestamp - input;
         var d = Math.floor(seconds / (3600 * 24));
         var h = Math.floor((seconds % (3600 * 24)) / 3600);
         var m = Math.floor((seconds % 3600) / 60);
@@ -21,29 +22,17 @@ class NewsCard extends React.Component {
         }
     }
 
-    getURL(url) {
-        url = url.slice(8);
-        let newURL = '';
-        let i = 0;
-        while (url[i] !== '/') {
-            newURL = newURL + url[i];
-            i++;
-        }
-        return newURL;
-    }
 
-    truncateString(htDescription) {
-        if (htDescription !== undefined) {
-            if (htDescription.length < 200) {
-                return htDescription;
-            } else {
-                return htDescription.substring(0, 200) + "...";
-            }
-        } else {
-            let nullString = " "
-            return nullString.padEnd(200);
-        }
-    }
+     extractDomainFromUrl(url) {
+         try {
+             var loc = new URL(url);
+             return loc.hostname.replace("www.", "");
+         } catch (e) {
+             return "";
+         }
+   // return url;
+     }
+
 
     render() {
         return (
@@ -51,10 +40,18 @@ class NewsCard extends React.Component {
                 {this.props.newsItem.htImage!==undefined && <img src={this.props.newsItem.htImage} alt=""/>}
                 <h2>{this.props.newsItem.title}</h2>
                 <div>
-                    {this.truncateString(this.props.newsItem.htDescription)}
+                    <Truncate lines={5} ellipsis={<span>... <a href={this.props.newsItem.url}>Read more</a></span>}>
+                        {this.props.newsItem.htDescription}
+                    </Truncate>
+
                 </div>
                 <div className="footer">
-                    <a className="alignTextLeft" href={this.props.newsItem.url}>Source</a>
+                    <div className="footerRow">
+                        <a className="alignTextLeft" href={this.props.newsItem.url}>{this.extractDomainFromUrl(this.props.newsItem.url)}</a>
+                        <div>
+                            {this.calculateTime(this.props.newsItem.time)} ago
+                        </div>
+                    </div>
                     <div className="footerRow">
                         <div className="comments">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -65,7 +62,7 @@ class NewsCard extends React.Component {
                             <div>{this.props.newsItem.comments === undefined ? 0 : this.props.newsItem.comments} comments</div>
                         </div>
                         <div>
-                            {this.props.newsItem.score} points {this.calculateTime(this.props.newsItem.time)} ago
+                            {this.props.newsItem.score} points
                         </div>
                     </div>
                 </div>

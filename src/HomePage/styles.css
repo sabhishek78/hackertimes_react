@@ -1,27 +1,4 @@
-@font-face {
-    font-family: 'notoSerifBoldItalic';
-    src: url('/src/fonts/NotoSerif-BoldItalic.ttf') ;
-}
-@font-face {
-    font-family: 'notoSerifBold';
-    src: url('/src/fonts/NotoSerif-Bold.ttf') ;
-}
-@font-face {
-    font-family: 'notoSerifItalic';
-    src: url('/src/fonts/NotoSerif-Italic.ttf') ;
-}
-@font-face {
-    font-family: 'notoSerifRegular';
-    src: url('/src/fonts/NotoSerif-Regular.ttf') ;
-}
-@font-face {
-    font-family: 'robotoRegular';
-    src: url('/src/fonts/Roboto-Regular.ttf') ;
-}
-@font-face {
-    font-family: 'robotoLight';
-    src: url('/src/fonts/Roboto-Light.ttf') ;
-}
+
 .main-column {
     display: flex;
     flex-direction: column;
@@ -36,7 +13,7 @@
     background-color: white;
 }
 .title{
-    font-family:'notoSerifBoldItalic';
+
     font-size: 40px;
 }
 .Tabs{
@@ -53,7 +30,7 @@
     display: inline-block;
     margin: 4px 2px;
     cursor: pointer;
-    font-family: 'notoSerifRegular';
+
     font-size: 30px;
 }
 

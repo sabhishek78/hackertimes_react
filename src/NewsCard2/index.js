@@ -1,11 +1,12 @@
 import React from "react";
 import "./styles2.css";
+import Truncate from 'react-truncate';
 
 class NewsCard2 extends React.Component {
     calculateTime(input) {
         var date = new Date();
         var currentTimestamp = Math.floor(date.getTime() / 1000);
-        var seconds = currentTimestamp - input - 13.5 * 3600;
+        var seconds = currentTimestamp - input;
         var d = Math.floor(seconds / (3600 * 24));
         var h = Math.floor((seconds % (3600 * 24)) / 3600);
         var m = Math.floor((seconds % 3600) / 60);
@@ -21,44 +22,47 @@ class NewsCard2 extends React.Component {
         }
     }
 
-    getURL(url) {
-        if (url.length < 8) {
-            return url;
-        }
 
-        url = url.slice(8);
-        let newURL = '';
-        let i = 0;
-        while (url[i] !== '/' && i < url.length) {
-            newURL = newURL + url[i];
-            i++;
+    extractDomainFromUrl(url) {
+        try {
+            var loc = new URL(url);
+            return loc.hostname.replace("www.", "");
+        } catch (e) {
+            return "";
         }
-        return newURL;
+        // return url;
     }
-
     truncateString(htDescription) {
         if (htDescription !== undefined) {
-            if (htDescription.length < 100) {
+            if (htDescription.length < 200) {
                 return htDescription;
             } else {
-                return htDescription.substring(0, 100) + "...";
+                return htDescription.substring(0, 200) + "...";
             }
         } else {
-            return "                           ";
+            let nullString = " "
+            return nullString.padEnd(200);
         }
     }
-
     render() {
         return (
             <div className="newsCard2" >
                 <h3> {this.props.newsItem.title}</h3>
-                <div>
+                <div className="textAndImageNC2">
                     {this.props.newsItem.htImage!==undefined&&<img className="floatImageRight" src={this.props.newsItem.htImage} alt="" />}
-                    <img className="floatImageRight" src={this.props.newsItem.htImage} alt="" />
-                    <p>{this.truncateString(this.props.newsItem.htDescription)}</p>
+
+                    <Truncate lines={3} ellipsis={<span>... <a href={this.props.newsItem.url}>Read more</a></span>}>
+                        {this.props.newsItem.htDescription}
+                    </Truncate>
+
                 </div>
                 <div className="footer">
-                    <a className="alignTextLeft" href={this.props.newsItem.url}>Source</a>
+                    <div className="footerRow">
+                        <a className="alignTextLeft" href={this.props.newsItem.url}>{this.extractDomainFromUrl(this.props.newsItem.url)}</a>
+                        <div>
+                            {this.calculateTime(this.props.newsItem.time)} ago
+                        </div>
+                    </div>
                     <div className="footerRow">
                         <div className="comments">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -69,7 +73,7 @@ class NewsCard2 extends React.Component {
                             <div>{this.props.newsItem.comments === undefined ? 0 : this.props.newsItem.comments} comments</div>
                         </div>
                         <div>
-                            {this.props.newsItem.score} points {this.calculateTime(this.props.newsItem.time)} ago
+                            {this.props.newsItem.score} points
                         </div>
                     </div>
                 </div>
