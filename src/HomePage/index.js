@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./styles.css";
 import NewsCardGrid from "../NewsCardGrid";
 
@@ -7,115 +6,180 @@ class HomePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: [],
-            popularStory:"",
+            popularStoriesWithImage: [],
+            unPopularStoriesWithImage: [],
+            storiesWithoutImage: [],
             isLoaded: false,
-            count2: 1,
         };
     }
+
     // https://hacker-times.s3-us-west-1.amazonaws.com/${category}dayStories
     componentDidMount() {
-        // fetch('https://cors-anywhere.herokuapp.com/https://hacker-times.s3-us-west-1.amazonaws.com/0dayStories')
-        fetch('https://hacker-times.s3-us-west-1.amazonaws.com/topStories_prod')
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data.top);
-                let popularStory=this.getPopularStoryWithImage(data.top);
-                console.log("popular story=");
-                console.log(JSON.stringify(popularStory));
-                this.setState({
-                    isLoaded: true,
-                    items: data.top,
-                    popularStory:popularStory,
-                });
-
-            });
-
+        this.getNews();
 
     }
-     isItPopular(newsItem) {
-         var date = new Date();
-         var currentTimestamp = Math.floor(date.getTime() / 1000);
-         var seconds = currentTimestamp - newsItem.time;
-         var timeInHours = Math.floor((seconds % (3600 * 24)) / 3600);
-         let pointsSoFar=newsItem.score;
+
+    async getNews() {
+        let storiesWithoutImage = [];
+        let popularStoriesWithImage = [];
+        let unPopularStoriesWithImage = [];
+        // fetch('https://cors-anywhere.herokuapp.com/https://hacker-times.s3-us-west-1.amazonaws.com/0dayStories')
+        let response = await fetch('https://hacker-times.s3-us-west-1.amazonaws.com/topStories_prod')
+        let data = await response.json();
+
+        let storiesWithImage = this.getStoriesWithImage(data.top);
+        // console.log("stories with image="+storiesWithImage);
+
+        storiesWithoutImage = this.getStoriesWithoutImage(data.top);
+        // console.log("stories without image="+storiesWithoutImage);
+        console.log("no of stories without image=" + storiesWithoutImage.length);
+        popularStoriesWithImage = this.getPopularStoriesWithImage(storiesWithImage);
+        console.log("no of popular stories with image=" + popularStoriesWithImage.length);
+        unPopularStoriesWithImage = this.getUnPopularStoriesWithImage(storiesWithImage);
+        console.log("no of unpopular stories with image=" + unPopularStoriesWithImage.length);
+        console.log("fetch finished");
+        this.setState({
+            isLoaded: false,
+            popularStoriesWithImage: popularStoriesWithImage,
+            unPopularStoriesWithImage: unPopularStoriesWithImage,
+            storiesWithoutImage: storiesWithoutImage,
+        });
+
+
+        console.log("printing state variables");
+        console.log(this.state.popularStoriesWithImage.length);
+    }
+
+    getPopularStoriesWithImage(items) {
+        let list = [];
+        for (let i = 0; i < items.length; i++) {
+            if (this.isPopular(items[i])) {
+                list.push(items[i]);
+            }
+        }
+        return list;
+    }
+
+    getUnPopularStoriesWithImage(items) {
+        let list = [];
+        for (let i = 0; i < items.length; i++) {
+            if (!this.isPopular(items[i])) {
+                list.push(items[i]);
+            }
+        }
+        return list;
+    }
+
+    hasImage(newsItem) {
+        return newsItem.htImage !== undefined;
+    }
+
+    isPopular(newsItem) {
+        var date = new Date();
+        var currentTimestamp = Math.floor(date.getTime() / 1000);
+        var seconds = currentTimestamp - newsItem.time;
+        var timeInHours = Math.floor((seconds % (3600 * 24)) / 3600);
+        let pointsSoFar = newsItem.score;
 
         if ((timeInHours < 12 && timeInHours > 0) &&
             pointsSoFar >= (timeInHours * 10)) {
             console.log('popular story');
             return true;
-        }
-        else if (timeInHours >= 12 && pointsSoFar >= 120) {
+        } else if (timeInHours >= 12 && pointsSoFar >= 120) {
             console.log('popular story');
             return true;
         }
         return false;
     }
-     getPopularStoryWithImage(items){
-        for(let i=0;i<items.length;i++){
-           if(this.isItPopular(items[i]) && (items[i].htImage!==undefined)) {
-               return items[i];
-           }
-       }
+
+    //  movePopularStorytoTheFirstPosition(items){
+    //     console.log("inside move popular story");
+    //     console.log('items='+items);
+    //     let removedStory;
+    //     for(let i=0;i<items.length;i++){
+    //        if(this.isPopular(items[i]) && (items[i].htImage!==undefined)) {
+    //            removedStory=items.splice(i,1);
+    //            break;
+    //        }
+    //    }
+    //     items.splice(0,0,removedStory[0]);
+    //     console.log("items="+items);
+    //    return items;
+    // }
+    getStoriesWithImage(items) {
+        let storyList = [];
+        for (let i = 0; i < items.length; i++) {
+            if (this.hasImage(items[i])) {
+                storyList.push(items[i]);
+            }
+        }
+        return storyList;
     }
-     getTabName(dayNumber) {
-        var daysOfWeek=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-        daysOfWeek.reverse();
-        console.log(daysOfWeek);
+
+    getStoriesWithoutImage(items) {
+        let storyList = [];
+        for (let i = 0; i < items.length; i++) {
+            if (!this.hasImage(items[i])) {
+                storyList.push(items[i]);
+            }
+        }
+        return storyList;
+    }
+
+    getTabName(dayNumber) {
+        var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var d = new Date();
         var today = d.getDay();
-        console.log('today='+today);
-        let daysArray=[];
-        for(let i=today;i<=6;i++){
+        // console.log('today='+today);
+        let daysArray = [];
+        for (let i = today; i >= 0; i--) {
             daysArray.push(i);
         }
-        console.log('daysArray='+daysArray);
-        for(let i=0;i<today;i++){
+        // console.log('daysArray='+daysArray);
+        for (let i = 6; i > today; i--) {
             daysArray.push(i);
         }
-        console.log('daysArray='+daysArray);
-        let tabList=[];
-        for(let i=0;i<daysArray.length;i++){
+        // console.log('daysArray='+daysArray);
+        let tabList = [];
+        for (let i = 0; i < daysArray.length; i++) {
             tabList.push(daysOfWeek[daysArray[i]]);
         }
-        console.log(tabList);
+        // console.log(tabList);
         return tabList[dayNumber];
     }
-  fetchNthDayStories(day){
-        if(day===0){
-            fetch('https://hacker-times.s3-us-west-1.amazonaws.com/topStories_prod')
-                .then(res => res.json())
-                .then(data => {
-                    let popularStory=this.getPopularStoryWithImage(data.top);
-                    this.setState({
-                        isLoaded: true,
-                        items: data.top,
-                        popularStory:popularStory,
-                    });
 
+    fetchNthDayStories(day) {
+        fetch(day === 0 ? 'https://hacker-times.s3-us-west-1.amazonaws.com/topStories_prod' : 'https://cors-anywhere.herokuapp.com/https://hacker-times.s3-us-west-1.amazonaws.com/' + day + 'dayStories_prod')
+            .then(res => res.json())
+            .then(data => {
+                let storiesWithImage = this.getStoriesWithImage(data.top);
+                // console.log("stories with image="+storiesWithImage);
+                console.log("no of stories with image=" + storiesWithImage.length);
+                let storiesWithoutImage = this.getStoriesWithoutImage(data.top);
+                // console.log("stories without image="+storiesWithoutImage);
+                console.log("no of stories without image=" + storiesWithoutImage.length);
+                let popularStoriesWithImage = this.getPopularStoriesWithImage(storiesWithImage);
+                console.log("no of popular stories with image=" + popularStoriesWithImage.length);
+                let unPopularStoriesWithImage = this.getUnPopularStoriesWithImage(storiesWithImage);
+                console.log("no of unpopular stories with image=" + unPopularStoriesWithImage.length);
+                this.setState({
+                    isLoaded: true,
+                    items: data.top,
+                    popularStoriesWithImage: popularStoriesWithImage,
+                    unPopularStoriesWithImage: unPopularStoriesWithImage,
+                    storiesWithoutImage: storiesWithoutImage,
                 });
-
-
-        }else{
-            fetch('https://cors-anywhere.herokuapp.com/https://hacker-times.s3-us-west-1.amazonaws.com/'+day+'dayStories_prod')
-                .then(res => res.json())
-                .then(data => {
-                    let popularStory=this.getPopularStoryWithImage(data.top);
-                    this.setState({
-                        isLoaded: true,
-                        items: data.top,
-                        popularStory:popularStory,
-                    });
-
-                });
-
-        }
+            });
+        console.log("now checking state variables");
+        console.log("no of stories without image=" + this.state.storiesWithoutImage.length);
     }
-    render() {
 
+    render() {
+        console.log("in the main page " + this.state.storiesWithoutImage.length);
         if (!this.state.isLoaded) {
             return <div>Loading ... </div>;
         } else {
+
             return (
                 <div className="main-column">
                     <div className="Title">
@@ -123,15 +187,17 @@ class HomePage extends React.Component {
                     </div>
                     <div className="Tabs">
 
-                        <button className="tab" onClick={()=>this.fetchNthDayStories(0)}>Latest</button>
-                        <button className="tab" onClick={()=>this.fetchNthDayStories(1)}>Yesterday</button>
-                        <button className="tab" onClick={()=>this.fetchNthDayStories(2)}>{this.getTabName(2)}</button>
-                        <button className="tab" onClick={()=>this.fetchNthDayStories(3)}>{this.getTabName(3)}</button>
-                        <button className="tab" onClick={()=>this.fetchNthDayStories(4)}>{this.getTabName(4)}</button>
-                        <button className="tab" onClick={()=>this.fetchNthDayStories(5)}>{this.getTabName(5)}</button>
-                        <button className="tab" onClick={()=>this.fetchNthDayStories(6)}>{this.getTabName(6)}</button>
+                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(0)}>{this.getTabName(0)}</button>*/}
+                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(1)}>{this.getTabName(1)}</button>*/}
+                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(2)}>{this.getTabName(2)}</button>*/}
+                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(3)}>{this.getTabName(3)}</button>*/}
+                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(4)}>{this.getTabName(4)}</button>*/}
+                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(5)}>{this.getTabName(5)}</button>*/}
+                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(6)}>{this.getTabName(6)}</button>*/}
                     </div>
-                   <NewsCardGrid popularStory={this.state.popularStory} items={this.state.items}/>
+                    <NewsCardGrid popularStoriesWithImage={this.state.popularStoriesWithImage}
+                                  unPopularStoriesWithImage={this.state.unPopularStoriesWithImage}
+                                  storiesWithoutImage={this.state.storiesWithoutImage}/>
 
                 </div>
 

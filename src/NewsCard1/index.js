@@ -37,8 +37,8 @@ class NewsCard extends React.Component {
     render() {
         return (
             <div className="newsCard1" >
-                {this.props.newsItem.htImage!==undefined && <img src={this.props.newsItem.htImage} alt=""/>}
-                <h2>{this.props.newsItem.title}</h2>
+                {this.props.newsItem.htImage!==undefined && <a href={this.props.newsItem.url} target="_blank"><img className="image" src={this.props.newsItem.htImage} alt=""/></a>}
+                <a href={this.props.newsItem.url} style={{textDecoration: 'none'}} target="_blank"><h2 class="underline-on-hover">{this.props.newsItem.title}</h2></a>
                 <div>
                     <Truncate lines={5} ellipsis={<span>... <a href={this.props.newsItem.url}>Read more</a></span>}>
                         {this.props.newsItem.htDescription}
@@ -59,7 +59,7 @@ class NewsCard extends React.Component {
                                     d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
                                 <path d="M0 0h24v24H0z" fill="none"/>
                             </svg>
-                            <div>{this.props.newsItem.comments === undefined ? 0 : this.props.newsItem.comments} comments</div>
+                            <div><a href={"https://news.ycombinator.com/item?id="+this.props.newsItem.id}>{this.props.newsItem.kids === undefined ? 0 : this.props.newsItem.kids.length} comments</a></div>
                         </div>
                         <div>
                             {this.props.newsItem.score} points

@@ -47,9 +47,11 @@ class NewsCard3 extends React.Component {
         if(this.props.newsItem!==undefined){
             return (
                 <div className="newsCard3" >
-                    {this.props.newsItem.htImage!==undefined && <img className="newsCard3Image" src={this.props.newsItem.htImage} alt="" />}
+                    {/*{this.props.newsItem.htImage!==undefined && <img className="newsCard3Image" src={this.props.newsItem.htImage} alt="" />}*/}
+                    {this.props.newsItem.htImage!==undefined && <a href={this.props.newsItem.url} target="_blank"><img className="newsCard3Image" src={this.props.newsItem.htImage} alt=""/></a>}
+
                     <div className="newsCard3TextSection">
-                        <h3> {this.props.newsItem.title}</h3>
+                        <a href={this.props.newsItem.url} target="_blank"><h3 class="underline-on-hover"> {this.props.newsItem.title}</h3></a>
                         <Truncate lines={5} ellipsis={<span>... <a href={this.props.newsItem.url}>Read more</a></span>}>
                             {this.props.newsItem.htDescription}
                         </Truncate>
@@ -68,7 +70,7 @@ class NewsCard3 extends React.Component {
                                             d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
                                         <path d="M0 0h24v24H0z" fill="none"/>
                                     </svg>
-                                    <div>{this.props.newsItem.comments === undefined ? 0 : this.props.newsItem.comments} comments</div>
+                                    <div><a href={"https://news.ycombinator.com/item?id="+this.props.newsItem.id}>{this.props.newsItem.kids === undefined ? 0 : this.props.newsItem.kids.length} comments</a></div>
                                 </div>
                                 <div>
                                     {this.props.newsItem.score} points
