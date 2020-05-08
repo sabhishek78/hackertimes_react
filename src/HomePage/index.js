@@ -14,10 +14,10 @@ class HomePage extends React.Component {
     }
 
     // https://hacker-times.s3-us-west-1.amazonaws.com/${category}dayStories
-    componentDidMount() {
-        this.getNews();
-
-    }
+    // componentDidMount() {
+    //      this.getNews();
+    //
+    // }
 
     async getNews() {
         let storiesWithoutImage = [];
@@ -169,7 +169,7 @@ class HomePage extends React.Component {
                         <h1 className="title">The McLaren Times </h1>
                     </div>
                     <div className="Tabs">
-                        <button className="tab" onClick={() => this.fetchNthDayStories(0)}>{this.getTabName(0)}</button>
+                        <button className="tab" onClick={() => this.getNews()}>{this.getTabName(0)}</button>
                         <button className="tab" onClick={() => this.fetchNthDayStories(1)}>{this.getTabName(1)}</button>
                         <button className="tab" onClick={() => this.fetchNthDayStories(2)}>{this.getTabName(2)}</button>
                         <button className="tab" onClick={() => this.fetchNthDayStories(3)}>{this.getTabName(3)}</button>
@@ -177,7 +177,7 @@ class HomePage extends React.Component {
                         <button className="tab" onClick={() => this.fetchNthDayStories(5)}>{this.getTabName(5)}</button>
                         <button className="tab" onClick={() => this.fetchNthDayStories(6)}>{this.getTabName(6)}</button>
                     </div>
-                    <NewsCardGrid popularStoriesWithImage={this.state.popularStoriesWithImage}
+                    <NewsCardGrid key={this.state.popularStoriesWithImage.length} popularStoriesWithImage={this.state.popularStoriesWithImage}
                                   unPopularStoriesWithImage={this.state.unPopularStoriesWithImage}
                                   storiesWithoutImage={this.state.storiesWithoutImage}/>
 
