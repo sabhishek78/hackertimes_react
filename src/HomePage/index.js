@@ -9,7 +9,7 @@ class HomePage extends React.Component {
             popularStoriesWithImage: [],
             unPopularStoriesWithImage: [],
             storiesWithoutImage: [],
-            isLoaded: false,
+
         };
     }
 
@@ -32,14 +32,14 @@ class HomePage extends React.Component {
 
         storiesWithoutImage = this.getStoriesWithoutImage(data.top);
         // console.log("stories without image="+storiesWithoutImage);
-        console.log("no of stories without image=" + storiesWithoutImage.length);
+         console.log("no of stories without image=" + storiesWithoutImage.length);
         popularStoriesWithImage = this.getPopularStoriesWithImage(storiesWithImage);
         console.log("no of popular stories with image=" + popularStoriesWithImage.length);
         unPopularStoriesWithImage = this.getUnPopularStoriesWithImage(storiesWithImage);
         console.log("no of unpopular stories with image=" + unPopularStoriesWithImage.length);
         console.log("fetch finished");
         this.setState({
-            isLoaded: false,
+            isLoaded: true,
             popularStoriesWithImage: popularStoriesWithImage,
             unPopularStoriesWithImage: unPopularStoriesWithImage,
             storiesWithoutImage: storiesWithoutImage,
@@ -47,7 +47,9 @@ class HomePage extends React.Component {
 
 
         console.log("printing state variables");
-        console.log(this.state.popularStoriesWithImage.length);
+        console.log("no of stories without image=" + this.state.storiesWithoutImage.length);
+        console.log("no of popular stories with image=" + this.state.popularStoriesWithImage.length);
+        console.log("no of unpopular stories with image=" + this.state.unPopularStoriesWithImage.length);
     }
 
     getPopularStoriesWithImage(items) {
@@ -83,29 +85,14 @@ class HomePage extends React.Component {
 
         if ((timeInHours < 12 && timeInHours > 0) &&
             pointsSoFar >= (timeInHours * 10)) {
-            console.log('popular story');
+            // console.log('popular story');
             return true;
         } else if (timeInHours >= 12 && pointsSoFar >= 120) {
-            console.log('popular story');
+            // console.log('popular story');
             return true;
         }
         return false;
     }
-
-    //  movePopularStorytoTheFirstPosition(items){
-    //     console.log("inside move popular story");
-    //     console.log('items='+items);
-    //     let removedStory;
-    //     for(let i=0;i<items.length;i++){
-    //        if(this.isPopular(items[i]) && (items[i].htImage!==undefined)) {
-    //            removedStory=items.splice(i,1);
-    //            break;
-    //        }
-    //    }
-    //     items.splice(0,0,removedStory[0]);
-    //     console.log("items="+items);
-    //    return items;
-    // }
     getStoriesWithImage(items) {
         let storyList = [];
         for (let i = 0; i < items.length; i++) {
@@ -163,37 +150,32 @@ class HomePage extends React.Component {
                 let unPopularStoriesWithImage = this.getUnPopularStoriesWithImage(storiesWithImage);
                 console.log("no of unpopular stories with image=" + unPopularStoriesWithImage.length);
                 this.setState({
-                    isLoaded: true,
                     items: data.top,
                     popularStoriesWithImage: popularStoriesWithImage,
                     unPopularStoriesWithImage: unPopularStoriesWithImage,
                     storiesWithoutImage: storiesWithoutImage,
                 });
             });
-        console.log("now checking state variables");
+        console.log("printing state variables");
         console.log("no of stories without image=" + this.state.storiesWithoutImage.length);
+        console.log("no of popular stories with image=" + this.state.popularStoriesWithImage.length);
+        console.log("no of unpopular stories with image=" + this.state.unPopularStoriesWithImage.length);
     }
 
     render() {
-        console.log("in the main page " + this.state.storiesWithoutImage.length);
-        if (!this.state.isLoaded) {
-            return <div>Loading ... </div>;
-        } else {
-
-            return (
+        return (
                 <div className="main-column">
                     <div className="Title">
                         <h1 className="title">The McLaren Times </h1>
                     </div>
                     <div className="Tabs">
-
-                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(0)}>{this.getTabName(0)}</button>*/}
-                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(1)}>{this.getTabName(1)}</button>*/}
-                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(2)}>{this.getTabName(2)}</button>*/}
-                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(3)}>{this.getTabName(3)}</button>*/}
-                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(4)}>{this.getTabName(4)}</button>*/}
-                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(5)}>{this.getTabName(5)}</button>*/}
-                        {/*<button className="tab" onClick={() => this.fetchNthDayStories(6)}>{this.getTabName(6)}</button>*/}
+                        <button className="tab" onClick={() => this.fetchNthDayStories(0)}>{this.getTabName(0)}</button>
+                        <button className="tab" onClick={() => this.fetchNthDayStories(1)}>{this.getTabName(1)}</button>
+                        <button className="tab" onClick={() => this.fetchNthDayStories(2)}>{this.getTabName(2)}</button>
+                        <button className="tab" onClick={() => this.fetchNthDayStories(3)}>{this.getTabName(3)}</button>
+                        <button className="tab" onClick={() => this.fetchNthDayStories(4)}>{this.getTabName(4)}</button>
+                        <button className="tab" onClick={() => this.fetchNthDayStories(5)}>{this.getTabName(5)}</button>
+                        <button className="tab" onClick={() => this.fetchNthDayStories(6)}>{this.getTabName(6)}</button>
                     </div>
                     <NewsCardGrid popularStoriesWithImage={this.state.popularStoriesWithImage}
                                   unPopularStoriesWithImage={this.state.unPopularStoriesWithImage}
@@ -204,7 +186,7 @@ class HomePage extends React.Component {
             );
         }
 
-    }
+
 }
 
 export default HomePage
