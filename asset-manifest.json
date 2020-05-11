@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/hacker_times_web/static/css/main.8a02e1fc.chunk.css",
-    "main.js": "/hacker_times_web/static/js/main.d957b84e.chunk.js",
-    "main.js.map": "/hacker_times_web/static/js/main.d957b84e.chunk.js.map",
-    "runtime-main.js": "/hacker_times_web/static/js/runtime-main.d3bfc1bb.js",
-    "runtime-main.js.map": "/hacker_times_web/static/js/runtime-main.d3bfc1bb.js.map",
-    "static/js/2.beae5158.chunk.js": "/hacker_times_web/static/js/2.beae5158.chunk.js",
-    "static/js/2.beae5158.chunk.js.map": "/hacker_times_web/static/js/2.beae5158.chunk.js.map",
-    "index.html": "/hacker_times_web/index.html",
-    "precache-manifest.cd7fb8f1baa586c52be61d478017bef2.js": "/hacker_times_web/precache-manifest.cd7fb8f1baa586c52be61d478017bef2.js",
-    "service-worker.js": "/hacker_times_web/service-worker.js",
-    "static/css/main.8a02e1fc.chunk.css.map": "/hacker_times_web/static/css/main.8a02e1fc.chunk.css.map",
-    "static/js/2.beae5158.chunk.js.LICENSE.txt": "/hacker_times_web/static/js/2.beae5158.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/hacker_times_web/static/media/logo.5d5d9eef.svg"
+    "main.css": "/hackertimes_react/static/css/main.8a02e1fc.chunk.css",
+    "main.js": "/hackertimes_react/static/js/main.c5c70306.chunk.js",
+    "main.js.map": "/hackertimes_react/static/js/main.c5c70306.chunk.js.map",
+    "runtime-main.js": "/hackertimes_react/static/js/runtime-main.e5ad3bde.js",
+    "runtime-main.js.map": "/hackertimes_react/static/js/runtime-main.e5ad3bde.js.map",
+    "static/js/2.beae5158.chunk.js": "/hackertimes_react/static/js/2.beae5158.chunk.js",
+    "static/js/2.beae5158.chunk.js.map": "/hackertimes_react/static/js/2.beae5158.chunk.js.map",
+    "index.html": "/hackertimes_react/index.html",
+    "precache-manifest.3dd1140d15238407c435e372aa3f5769.js": "/hackertimes_react/precache-manifest.3dd1140d15238407c435e372aa3f5769.js",
+    "service-worker.js": "/hackertimes_react/service-worker.js",
+    "static/css/main.8a02e1fc.chunk.css.map": "/hackertimes_react/static/css/main.8a02e1fc.chunk.css.map",
+    "static/js/2.beae5158.chunk.js.LICENSE.txt": "/hackertimes_react/static/js/2.beae5158.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/hackertimes_react/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.d3bfc1bb.js",
+    "static/js/runtime-main.e5ad3bde.js",
     "static/js/2.beae5158.chunk.js",
     "static/css/main.8a02e1fc.chunk.css",
-    "static/js/main.d957b84e.chunk.js"
+    "static/js/main.c5c70306.chunk.js"
   ]
 }
