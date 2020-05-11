@@ -2,7 +2,7 @@ import React from "react";
 import "./styles1.css";
 import Truncate from 'react-truncate';
 
-class NewsCard extends React.Component {
+class PopularNewsCard extends React.Component {
      calculateTime(input) {
         var date = new Date();
         var currentTimestamp = Math.floor(date.getTime() / 1000);
@@ -36,7 +36,7 @@ class NewsCard extends React.Component {
 
     render() {
         return (
-            <div className="newsCard1" >
+            <div className="popularNewsCard" >
                 {this.props.newsItem.htImage!==undefined && <a href={this.props.newsItem.url} target="_blank"><img className="image" src={this.props.newsItem.htImage} alt=""/></a>}
                 <a href={this.props.newsItem.url} style={{textDecoration: 'none'}} target="_blank"><h2 class="underline-on-hover">{this.props.newsItem.title}</h2></a>
                 <div>
@@ -71,4 +71,4 @@ class NewsCard extends React.Component {
     }
 }
 
-export default NewsCard;
+export default PopularNewsCard;

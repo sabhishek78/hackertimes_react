@@ -1,6 +1,6 @@
 import React from "react";
 // import "./styles1.css";
-import NewsCard from "../NewsCard1";
+import NewsCard from "../PopularNewsCard";
 import NewsCard2 from "../NewsCard2";
 
 

@@ -1,15 +1,15 @@
 import React from "react";
 // import "./styles1.css";
-import NewsCard from "../NewsCard1";
-import NewsCard2 from "../NewsCard2";
+
+import PopularNewsCard from "../PopularNewsCard";
 
 
 class Section3 extends React.Component {
     render() {
         return (
-            <div className="row4">
-                {this.props.stories[0]!==undefined&&<NewsCard2 newsItem={this.props.stories[0]}/>}
-                {this.props.stories[1]!==undefined&&<NewsCard2 newsItem={this.props.stories[1]}/>}
+            <div className="section3">
+                {this.props.stories[0]!==undefined&&<PopularNewsCard className="section3Story" newsItem={this.props.stories[0]}/>}
+                {this.props.stories[1]!==undefined&&<PopularNewsCard className="section3Story" newsItem={this.props.stories[1]}/>}
             </div>
         );
     }

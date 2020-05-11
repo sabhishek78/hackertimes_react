@@ -66,10 +66,15 @@ hr {
     flex-direction: row;
     flex:3;
 }
-.row4 {
+.section3 {
     display: flex;
     flex-direction: row;
-    flex:3;
+
+}
+.section3Story {
+    display :flex;
+    flex:1;
+
 }
 #left-col {
     float: left;
