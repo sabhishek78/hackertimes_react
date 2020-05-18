@@ -4,21 +4,8 @@ import Section2 from "../Section2";
 import Section3 from "../Section3";
 import Section4 from "../Section4";
 class NewsCardGrid extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         resultArray: this.props.resultArray,
-    //         index: 0,
-    //     };
-    //     console.log("resultArray");
-    //     // console.log(this.state.resultArray);
-    // }
-
     render() {
-        console.log("rendering newsgrid");
-        console.log(this.props.stories.length);
         let index = 0;
-
         let newsGrid=[];
         while(index<this.props.stories.length) {
             let currentStoryBlock = this.props.stories[index];
@@ -39,7 +26,7 @@ class NewsCardGrid extends React.Component {
         }
         return (
             <div>
-                {/*{newsGrid.map((item) => item)}*/}
+
                 {newsGrid}
             </div>
         );

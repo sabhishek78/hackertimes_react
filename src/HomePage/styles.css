@@ -3,105 +3,188 @@
     display: flex;
     flex-direction: column;
     width:1200px;
-    background-color: white;
+
     margin:auto;
 }
-.Title {
+
+.title{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: white;
-}
-.title{
-
     font-size: 40px;
 }
-.Tabs{
+.TabRow{
     display: flex;
     flex-direction: row;
     justify-content: center;
     border-bottom: 1px solid lightgray;
 }
 .tab {
-    /*background-color: white;*/
+
     color: black;
-    padding: 15px 30px;
+    padding: 15px 23px;
     text-align: center;
     display: inline-block;
-    margin: 4px 2px;
+    margin: 2px 1px;
     cursor: pointer;
 
     font-size: 30px;
 }
-hr {
-    border: 0;
-    clear:both;
-    display:block;
-    width: 96%;
-    background-color:#FFFF00;
-    height: 1px;
-}
+
 .section1 {
     display: flex;
     flex-direction: row;
-    flex:5;
-    border:5px;
-    border-color:red;
-
+    padding: 10px;
+    border-bottom: 1px solid black;
 }
 
-.section2 {
-    display: flex;
-    flex-direction: row;
-    flex:3;
 
-}
-.row3 {
-    display: flex;
-    flex-direction: row;
-    flex:3;
-}
-.row5 {
-    display: flex;
-    flex-direction: row;
-    flex:3;
-}
+
 .section3 {
     display: flex;
     flex-direction: row;
-
+    padding: 10px;
+    border-bottom: 1px solid black;
 }
-.section3Story {
-    display :flex;
-    flex:1;
 
-}
 #section1col1 {
-    float: left;
-    width: 50%;
-    background-color: white;
-    padding-bottom: 500em;
-    margin-bottom: -500em;
-    border-bottom: 1px solid lightgray;
+    /*display:flex;*/
+    flex:2;
+    padding: 5px;
+    border-right: 1px solid black;
 }
 #section1col2 {
-    display:flex;
+    /*display:flex;*/
     flex:1;
     flex-direction: column;
-    margin-right: -1px; /* Thank you IE */
-    background-color: white;
-    padding-bottom: 500em;
-    margin-bottom: -500em;
+    padding: 5px;
+    border-right: 1px solid black;
 }
-#section2col {
-    max-width:300px;
-    margin-right: -1px; /* Thank you IE */
-    background-color: white;
-    padding-bottom: 500em;
-    margin-bottom: -500em;
+#section1col3 {
+    /*display:flex;*/
+    flex:1;
+    flex-direction: column;
+    padding: 5px;
+
+}
+.section2 {
+    display: flex;
+    flex-direction: row;
+
+    border-bottom: 1px solid black;
+
+}
+.section2col {
+    display:flex;
+    flex:1;
+    margin:10px;
+
+}
+.section2col1 {
+    display:flex;
+    flex:1;
+    margin:10px;
+    border-right: 10px solid black;
+}
+.popularNewsCard{
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+
+}
+
+
+.popularNewsCardSection3{
+    
+    display: flex;
+    flex:1;
+    flex-direction: row;
+
+}
+.section3Col1{
+    border-right: 1px solid black;
+}
+
+.footer{
+    display: flex;
+    margin-top:8px;
+    flex-direction: column;
+
+}
+.footerRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+.comments{
+    display: flex;
+    flex-direction: row;
+}
+.alignTextLeft{
+    text-align: start;
+}
+
+.image{
+    width:100%;
+    height:auto;
+}
+.underline-on-hover:hover {
+    text-decoration: underline;
+}
+a:link {
+    text-decoration: none;
+    color:black;
+}
+
+a:visited {
+    color: grey;
+}
+
+a:hover {
+    color: lightgreen;
+}
+
+a:active {
+    color: hotpink;
+}
+.newsCard2 {
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    border-top: 1px solid black;
+
+}
+
+.floatImageRight{
+    width:50%;
+    height:auto;
+    float:right;
 }
 
 
 
+
+.newsCard3 {
+    display: flex;
+    flex-direction:row;
+    flex:1;
+
+}
+
+.newsCard3Image{
+    width:100%;
+    height:auto;
+}
+
+.comments{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.alignTextLeft{
+    text-align: start;
+}
 
 

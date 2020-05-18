@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
 import NewsCardGrid from "../NewsCardGrid";
+
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
@@ -9,7 +10,7 @@ class HomePage extends React.Component {
             storiesLoaded:false,
         };
     }
-    // https://hacker-times.s3-us-west-1.amazonaws.com/${category}dayStories
+
     componentDidMount() {
          this.fetchTopStories();
     }
@@ -17,7 +18,7 @@ class HomePage extends React.Component {
         let storiesWithoutImage = [];
         let popularStoriesWithImage = [];
         let unPopularStoriesWithImage = [];
-        // fetch('https://cors-anywhere.herokuapp.com/https://hacker-times.s3-us-west-1.amazonaws.com/0dayStories')
+
         let response = await fetch('https://hacker-times.s3-us-west-1.amazonaws.com/topStories_prod');
         let data = await response.json();
         let storiesWithImage = this.getStoriesWithImage(data.top);
@@ -120,7 +121,7 @@ class HomePage extends React.Component {
         let storiesWithoutImage = [];
         let popularStoriesWithImage = [];
         let unPopularStoriesWithImage = [];
-        // fetch('https://cors-anywhere.herokuapp.com/https://hacker-times.s3-us-west-1.amazonaws.com/0dayStories')
+
         let response = await fetch(day === 0 ? 'https://hacker-times.s3-us-west-1.amazonaws.com/topStories_prod' : 'https://cors-anywhere.herokuapp.com/https://hacker-times.s3-us-west-1.amazonaws.com/' + day + 'dayStories_prod');
         let data = await response.json();
         let storiesWithImage = this.getStoriesWithImage(data.top);
@@ -144,9 +145,9 @@ class HomePage extends React.Component {
     }
     newsCardGenerator(pArray, uArray, wArray) {
         console.log("inside newsCardGenerator");
-        console.log("length of pArray=" + pArray.length);
-        console.log("length of uArray=" + uArray.length);
-        console.log("length of wArray=" + wArray.length);
+        // console.log("length of pArray=" + pArray.length);
+        // console.log("length of uArray=" + uArray.length);
+        // console.log("length of wArray=" + wArray.length);
         var resultArray = [];
         while (pArray.length !== 0 || uArray.length !== 0 || wArray.length !== 0) {
             resultArray.push(pArray.length > 1
@@ -165,7 +166,8 @@ class HomePage extends React.Component {
                 finalArray.push(resultArray[i]);
             }
         }
-
+       console.log("final array=");
+        console.log(finalArray);
         return finalArray;
     }
     getSection1(pArray, wArray, uArray) {
@@ -176,20 +178,15 @@ class HomePage extends React.Component {
           temp.push(block[0]);
           temp.push(block[1]);
         }
-        console.log("printing section1");
-        console.log(JSON.stringify(temp));
+
         return temp;
     }
     getSection3(pArray, wArray, uArray) {
-        // console.log("creating section3");
+
         let temp = [];
         temp.push(pArray.shift());
         temp.push(pArray.shift());
-        // for (let i = 1; i <= 2; i++) {
-        //     var block=  this.getBlock(pArray, wArray, uArray);
-        //     temp.push(block[0]);
-        //     temp.push(block[1]);
-        // }
+
         return temp;
     }
     getSection2(pArray, wArray, uArray) {
@@ -242,10 +239,11 @@ class HomePage extends React.Component {
         const tabNames = this.getTabName();
         return (
             <div className="main-column">
-                <div className="Title">
+                <div >
                     <h1 className="title">The McLaren Times </h1>
                 </div>
-                <div className="Tabs">
+                <div className="TabRow">
+
                     <button className="tab" onClick={(e) => this.fetchTopStories()}>{tabNames[0]}</button>
                     <button className="tab" onClick={(e) => this.fetchNthDayStories(1, e)}>{tabNames[1]}</button>
                     <button className="tab" onClick={(e) => this.fetchNthDayStories(2, e)}>{tabNames[2]}</button>

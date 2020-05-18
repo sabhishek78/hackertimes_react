@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles3.css";
+
 import Truncate from 'react-truncate';
 
 class NewsCard3 extends React.Component {

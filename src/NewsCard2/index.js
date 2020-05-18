@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles2.css";
+
 import Truncate from 'react-truncate';
 
 class NewsCard2 extends React.Component {
@@ -21,8 +21,6 @@ class NewsCard2 extends React.Component {
             return hDisplay + mDisplay;
         }
     }
-
-
     extractDomainFromUrl(url) {
         try {
             var loc = new URL(url);
@@ -48,14 +46,11 @@ class NewsCard2 extends React.Component {
         return (
             <div className="newsCard2" >
                 <a href={this.props.newsItem.url} target="_blank"><h3 class="underline-on-hover"> {this.props.newsItem.title}</h3></a>
-                <div className="textAndImageNC2">
-                    {/*{this.props.newsItem.htImage!==undefined&&<img  className="floatImageRight" src={this.props.newsItem.htImage} alt="" />}*/}
+                <div>
                     {this.props.newsItem.htImage!==undefined && <a href={this.props.newsItem.url} target="_blank"><img className="floatImageRight" src={this.props.newsItem.htImage} alt=""/></a>}
-
                     <Truncate lines={3} ellipsis={<span>... <a href={this.props.newsItem.url}>Read more</a></span>}>
                         {this.props.newsItem.htDescription}
                     </Truncate>
-
                 </div>
                 <div className="footer">
                     <div className="footerRow">
