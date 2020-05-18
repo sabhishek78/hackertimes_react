@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/hackertimes_react/static/css/main.8a02e1fc.chunk.css",
-    "main.js": "/hackertimes_react/static/js/main.c5c70306.chunk.js",
-    "main.js.map": "/hackertimes_react/static/js/main.c5c70306.chunk.js.map",
+    "main.css": "/hackertimes_react/static/css/main.8187f8af.chunk.css",
+    "main.js": "/hackertimes_react/static/js/main.ba787381.chunk.js",
+    "main.js.map": "/hackertimes_react/static/js/main.ba787381.chunk.js.map",
     "runtime-main.js": "/hackertimes_react/static/js/runtime-main.e5ad3bde.js",
     "runtime-main.js.map": "/hackertimes_react/static/js/runtime-main.e5ad3bde.js.map",
-    "static/js/2.beae5158.chunk.js": "/hackertimes_react/static/js/2.beae5158.chunk.js",
-    "static/js/2.beae5158.chunk.js.map": "/hackertimes_react/static/js/2.beae5158.chunk.js.map",
+    "static/js/2.16ab34d0.chunk.js": "/hackertimes_react/static/js/2.16ab34d0.chunk.js",
+    "static/js/2.16ab34d0.chunk.js.map": "/hackertimes_react/static/js/2.16ab34d0.chunk.js.map",
     "index.html": "/hackertimes_react/index.html",
-    "precache-manifest.3dd1140d15238407c435e372aa3f5769.js": "/hackertimes_react/precache-manifest.3dd1140d15238407c435e372aa3f5769.js",
+    "precache-manifest.93577408cb952d40f6d6276cd4c776c6.js": "/hackertimes_react/precache-manifest.93577408cb952d40f6d6276cd4c776c6.js",
     "service-worker.js": "/hackertimes_react/service-worker.js",
-    "static/css/main.8a02e1fc.chunk.css.map": "/hackertimes_react/static/css/main.8a02e1fc.chunk.css.map",
-    "static/js/2.beae5158.chunk.js.LICENSE.txt": "/hackertimes_react/static/js/2.beae5158.chunk.js.LICENSE.txt",
+    "static/css/main.8187f8af.chunk.css.map": "/hackertimes_react/static/css/main.8187f8af.chunk.css.map",
+    "static/js/2.16ab34d0.chunk.js.LICENSE.txt": "/hackertimes_react/static/js/2.16ab34d0.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/hackertimes_react/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.e5ad3bde.js",
-    "static/js/2.beae5158.chunk.js",
-    "static/css/main.8a02e1fc.chunk.css",
-    "static/js/main.c5c70306.chunk.js"
+    "static/js/2.16ab34d0.chunk.js",
+    "static/css/main.8187f8af.chunk.css",
+    "static/js/main.ba787381.chunk.js"
   ]
 }
