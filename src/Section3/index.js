@@ -1,7 +1,5 @@
 import React from "react";
 import PopularNewsCardSection3 from "../PopularNewsCardSection3";
-
-
 class Section3 extends React.Component {
     render() {
         return (

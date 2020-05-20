@@ -3,9 +3,6 @@ import React from "react";
 import Truncate from 'react-truncate';
 import Footer from "../Footer";
 class PopularNewsCard extends React.Component {
-
-
-
     render() {
         return (
             <div className="popularNewsCard" >

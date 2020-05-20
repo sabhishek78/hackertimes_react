@@ -43,6 +43,7 @@ class Footer extends React.Component {
                         <div>
                             {this.calculateTime(this.props.newsItem.time)} ago
                         </div>
+
                     </div>
                     <div className="footerRow">
                         <div className="comments">
@@ -56,6 +57,7 @@ class Footer extends React.Component {
                         <div>
                             {this.props.newsItem.score} points
                         </div>
+
                     </div>
                 </div>
 
