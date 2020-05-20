@@ -70,22 +70,18 @@
 .section2 {
     display: flex;
     flex-direction: row;
-
     border-bottom: 1px solid black;
-
 }
-.section2col {
-    display:flex;
+.section2Col {
+    padding: 5px;
     flex:1;
-    margin:10px;
-
 }
-.section2col1 {
-    display:flex;
-    flex:1;
-    margin:10px;
-    border-right: 10px solid black;
-}
+/*.section2Col1 {*/
+/*    display:flex;*/
+/*    flex:1;*/
+/*  */
+/*    border-right: 10px solid black;*/
+/*}*/
 .popularNewsCard{
     display: flex;
     flex-direction: column;
@@ -103,8 +99,20 @@
 }
 .section3Col1{
     border-right: 1px solid black;
+    padding: 5px;
 }
+.section3Col2{
 
+    padding: 5px;
+}
+.section3Image{
+    flex:1;
+    padding: 5px;
+}
+.section3Text{
+    flex:1;
+    padding: 5px;
+}
 .footer{
     display: flex;
     margin-top:8px;
@@ -186,5 +194,18 @@ a:active {
 .alignTextLeft{
     text-align: start;
 }
+.titleRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: middle;
+
+}
+.titleImage{
+    width:30px;
+    height:30px;
+    vertical-align:middle;
+}
+
 
 

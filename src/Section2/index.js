@@ -8,7 +8,7 @@ class Section2 extends React.Component {
     render() {
         return (
             <div className="section2">
-                <div className="section2Col1" style={{borderRight:'1px solid black'}} >
+                <div className="section2Col" style={{borderRight:'1px solid black'}} >
                     <div>
                         {this.props.stories[0]!==undefined&&<PopularNewsCard newsItem={this.props.stories[0]}/>}
                     </div>

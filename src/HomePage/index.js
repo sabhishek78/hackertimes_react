@@ -1,6 +1,9 @@
 import React from "react";
 import "./styles.css";
 import NewsCardGrid from "../NewsCardGrid";
+import mclarenLogo from "../mclaren.png";
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -8,12 +11,14 @@ class HomePage extends React.Component {
         this.state = {
             stories:[],
             storiesLoaded:false,
+
         };
     }
 
     componentDidMount() {
          this.fetchTopStories();
     }
+
     async fetchTopStories() {
         let storiesWithoutImage = [];
         let popularStoriesWithImage = [];
@@ -239,18 +244,29 @@ class HomePage extends React.Component {
         const tabNames = this.getTabName();
         return (
             <div className="main-column">
-                <div >
-                    <h1 className="title">The McLaren Times </h1>
+                <div className="titleRow" >
+
+
+                        <h1><img className="titleImage" src={mclarenLogo} alt="Logo" />The McLaren Times </h1>
+
+
                 </div>
                 <div className="TabRow">
+                    <Tabs
+                        value={this.state.value} onChange={this.handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        centered
+                    >
+                        <Tab  onClick={(e) => this.fetchTopStories()} label="LATEST" />
+                        <Tab onClick={(e) => this.fetchNthDayStories(1, e)} label="YESTERDAY" />
+                        <Tab  onClick={(e) => this.fetchNthDayStories(2, e)} label={tabNames[2]} />
+                        <Tab onClick={(e) => this.fetchNthDayStories(3, e)} label={tabNames[3]} />
+                        <Tab onClick={(e) => this.fetchNthDayStories(4, e)} label={tabNames[4]} />
+                        <Tab onClick={(e) => this.fetchNthDayStories(5, e)} label={tabNames[5]} />
+                        <Tab onClick={(e) => this.fetchNthDayStories(6, e)} label={tabNames[6]} />
+                    </Tabs>
 
-                    <button className="tab" onClick={(e) => this.fetchTopStories()}>{tabNames[0]}</button>
-                    <button className="tab" onClick={(e) => this.fetchNthDayStories(1, e)}>{tabNames[1]}</button>
-                    <button className="tab" onClick={(e) => this.fetchNthDayStories(2, e)}>{tabNames[2]}</button>
-                    <button className="tab" onClick={(e) => this.fetchNthDayStories(3,e)}>{tabNames[3]}</button>
-                    <button className="tab" onClick={(e) => this.fetchNthDayStories(4,e)}>{tabNames[4]}</button>
-                    <button className="tab" onClick={(e) => this.fetchNthDayStories(5,e)}>{tabNames[5]}</button>
-                    <button className="tab" onClick={(e) => this.fetchNthDayStories(6,e)}>{tabNames[6]}</button>
                 </div>
                 {this.state.storiesLoaded?<NewsCardGrid stories={this.state.stories}/>:''}
 

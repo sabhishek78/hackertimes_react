@@ -1,6 +1,4 @@
 import React from "react";
-// import "./styles1.css";
-
 import PopularNewsCardSection3 from "../PopularNewsCardSection3";
 
 
