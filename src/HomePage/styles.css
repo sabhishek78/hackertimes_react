@@ -35,7 +35,7 @@
     display: flex;
     flex-direction: row;
     padding: 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid lightgray;
 }
 
 
@@ -44,21 +44,21 @@
     display: flex;
     flex-direction: row;
     padding: 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid lightgray;
 }
 
 #section1col1 {
     /*display:flex;*/
     flex:2;
     padding: 5px;
-    border-right: 1px solid black;
+    border-right: 1px solid lightgray;
 }
 #section1col2 {
     /*display:flex;*/
     flex:1;
     flex-direction: column;
     padding: 5px;
-    border-right: 1px solid black;
+    border-right: 1px solid lightgray;
 }
 #section1col3 {
     /*display:flex;*/
@@ -70,7 +70,7 @@
 .section2 {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid lightgray;
 }
 .section2Col {
     padding: 5px;
@@ -93,7 +93,7 @@
 
 }
 .section3Col1{
-    border-right: 1px solid black;
+    border-right: 1px solid lightgray;
     padding: 5px;
 }
 .section3Col2{
@@ -157,9 +157,11 @@ a:active {
     display: flex;
     flex-direction: column;
     padding: 3px;
-    border-top: 1px solid black;
+    border-top: 1px solid lightgray;
 
 }
+.tab a:hover,
+.tab a.active { background-color:red; }
 
 .floatImageRight{
     width:50%;
@@ -195,13 +197,13 @@ a:active {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    vertical-align: middle;
+
 
 }
 .titleImage{
-    width:30px;
-    height:30px;
-    vertical-align:middle;
+    width:100px;
+    height:100px;
+
 }
 
 

@@ -8,7 +8,7 @@ class Section2 extends React.Component {
     render() {
         return (
             <div className="section2">
-                <div className="section2Col" style={{borderRight:'1px solid black'}} >
+                <div className="section2Col" style={{borderRight:'1px solid lightgray'}} >
                     <div>
                         {this.props.stories[0]!==undefined&&<PopularNewsCard newsItem={this.props.stories[0]}/>}
                     </div>
@@ -17,7 +17,7 @@ class Section2 extends React.Component {
                    </div>
 
                 </div>
-                <div className="section2Col" style={{borderRight:'1px solid black'}}>
+                <div className="section2Col" style={{borderRight:'1px solid lightgray'}}>
                     <div >
                         {this.props.stories[2]!==undefined&&<PopularNewsCard newsItem={this.props.stories[2]}/>}
                     </div>
@@ -25,7 +25,7 @@ class Section2 extends React.Component {
                         {this.props.stories[3]!==undefined&&<NewsCard2 newsItem={this.props.stories[3]}/>}
                     </div>
                 </div>
-                <div className="section2Col" style={{borderRight:'1px solid black'}}>
+                <div className="section2Col" style={{borderRight:'1px solid lightgray'}}>
                     <div >
                         {this.props.stories[4]!==undefined&&<PopularNewsCard newsItem={this.props.stories[4]}/>}
                     </div>

@@ -10,9 +10,7 @@ class NewsCard2 extends React.Component {
                 <a href={this.props.newsItem.url} target="_blank"><h3 class="underline-on-hover"> {this.props.newsItem.title}</h3></a>
                 <div>
                     {this.props.newsItem.htImage!==undefined && <a href={this.props.newsItem.url} target="_blank"><img className="floatImageRight" src={this.props.newsItem.htImage} alt=""/></a>}
-                    <Truncate lines={3} ellipsis={<span>... <a href={this.props.newsItem.url}>Read more</a></span>}>
-                        {this.props.newsItem.htDescription}
-                    </Truncate>
+                    {this.props.newsItem.htDescription}
                 </div>
                 <Footer newsItem={this.props.newsItem}/>
             </div>

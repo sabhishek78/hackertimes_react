@@ -26,7 +26,6 @@ class NewsCardGrid extends React.Component {
         }
         return (
             <div>
-
                 {newsGrid}
             </div>
         );

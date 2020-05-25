@@ -1,6 +1,4 @@
 import React from "react";
-
-import Truncate from 'react-truncate';
 import Footer from "../Footer";
 
 class PopularNewsCardSection3 extends React.Component {
@@ -14,10 +12,7 @@ class PopularNewsCardSection3 extends React.Component {
                     <a href={this.props.newsItem.url} style={{textDecoration: 'none'}} target="_blank"><h2
                         className="underline-on-hover">{this.props.newsItem.title}</h2></a>
                     <div>
-                        <Truncate lines={5} ellipsis={<span>... <a href={this.props.newsItem.url}>Read more</a></span>}>
-                            {this.props.newsItem.htDescription}
-                        </Truncate>
-
+                        {this.props.newsItem.htDescription}
                     </div>
                     <Footer newsItem={this.props.newsItem}/>
                 </div>

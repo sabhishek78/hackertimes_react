@@ -27,16 +27,18 @@ class HomePage extends React.Component {
         let response = await fetch('https://hacker-times.s3-us-west-1.amazonaws.com/topStories_prod');
         let data = await response.json();
         let storiesWithImage = this.getStoriesWithImage(data.top);
-        // console.log("stories with image="+storiesWithImage);
+        let historicStories=this.getHistoricStories(storiesWithImage);
+        let unhistoricStories=this.getUnhistoricStories(storiesWithImage);
         storiesWithoutImage = this.getStoriesWithoutImage(data.top);
         // console.log("stories without image="+storiesWithoutImage);
+        console.log("no of historic stories="+historicStories.length);
         console.log("no of stories without image=" + storiesWithoutImage.length);
-        popularStoriesWithImage = this.getPopularStoriesWithImage(storiesWithImage);
+        popularStoriesWithImage = this.getPopularStoriesWithImage(unhistoricStories);
         console.log("no of popular stories with image=" + popularStoriesWithImage.length);
-        unPopularStoriesWithImage = this.getUnPopularStoriesWithImage(storiesWithImage);
+        unPopularStoriesWithImage = this.getUnPopularStoriesWithImage(unhistoricStories);
         console.log("no of unpopular stories with image=" + unPopularStoriesWithImage.length);
         console.log("fetch finished");
-        let resultArray=this.newsCardGenerator(popularStoriesWithImage,unPopularStoriesWithImage,storiesWithoutImage);
+        let resultArray=this.newsCardGenerator(historicStories,popularStoriesWithImage,unPopularStoriesWithImage,storiesWithoutImage);
         console.log("result Array of stories after sorting...");
         console.log(resultArray);
         console.log("No of stories="+resultArray.length);
@@ -100,6 +102,26 @@ class HomePage extends React.Component {
         }
         return storyList;
     }
+    getHistoricStories(items){
+        let storyList=[];
+       for(let i=0;i<items.length;i++){
+           if(items[i].title!==undefined && items[i].title.match(/\(\d\d\d\d\)/g)!==null){
+             storyList.push(items[i]);
+         }
+       }
+       console.log("number of historic Stories="+storyList.length);
+       return storyList;
+    }
+    getUnhistoricStories(items){
+        let storyList=[];
+        for(let i=0;i<items.length;i++){
+            if(items[i].title!==undefined && items[i].title.match(/\(\d\d\d\d\)/g)===null){
+                storyList.push(items[i]);
+            }
+        }
+        console.log("number of Unhistoric Stories="+storyList.length);
+        return storyList;
+    }
     getTabName() {
         var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var d = new Date();
@@ -123,23 +145,21 @@ class HomePage extends React.Component {
     }
     async fetchNthDayStories(day, e) {
         e.preventDefault();
-        let storiesWithoutImage = [];
-        let popularStoriesWithImage = [];
-        let unPopularStoriesWithImage = [];
-
         let response = await fetch(day === 0 ? 'https://hacker-times.s3-us-west-1.amazonaws.com/topStories_prod' : 'https://cors-anywhere.herokuapp.com/https://hacker-times.s3-us-west-1.amazonaws.com/' + day + 'dayStories_prod');
         let data = await response.json();
         let storiesWithImage = this.getStoriesWithImage(data.top);
-        // console.log("stories with image="+storiesWithImage);
-        storiesWithoutImage = this.getStoriesWithoutImage(data.top);
-        // console.log("stories without image="+storiesWithoutImage);
+        let  historicStories=this.getHistoricStories(storiesWithImage);
+        storiesWithImage=this.getUnHistoricStories(storiesWithImage);
+        let storiesWithoutImage = this.getStoriesWithoutImage(data.top);
+
         console.log("no of stories without image=" + storiesWithoutImage.length);
-        popularStoriesWithImage = this.getPopularStoriesWithImage(storiesWithImage);
+        let popularStoriesWithImage = this.getPopularStoriesWithImage(storiesWithImage);
         console.log("no of popular stories with image=" + popularStoriesWithImage.length);
-        unPopularStoriesWithImage = this.getUnPopularStoriesWithImage(storiesWithImage);
+        let unPopularStoriesWithImage = this.getUnPopularStoriesWithImage(storiesWithImage);
         console.log("no of unpopular stories with image=" + unPopularStoriesWithImage.length);
+        console.log("no of historic stories="+historicStories.length);
         console.log("fetch finished");
-        let resultArray=this.newsCardGenerator(popularStoriesWithImage,unPopularStoriesWithImage,storiesWithoutImage);
+        let resultArray=this.newsCardGenerator(historicStories,popularStoriesWithImage,unPopularStoriesWithImage,storiesWithoutImage);
         console.log("result Array of stories after sorting...");
         console.log(resultArray);
         console.log("No of stories="+resultArray.length);
@@ -148,19 +168,20 @@ class HomePage extends React.Component {
             storiesLoaded:true,
         });
     }
-    newsCardGenerator(pArray, uArray, wArray) {
+    newsCardGenerator(hArray,pArray, uArray, wArray) {
         console.log("inside newsCardGenerator");
-        // console.log("length of pArray=" + pArray.length);
-        // console.log("length of uArray=" + uArray.length);
-        // console.log("length of wArray=" + wArray.length);
+        console.log(hArray.length);
+        console.log(pArray.length);
+        console.log(uArray.length);
+        console.log(wArray.length);
         var resultArray = [];
-        while (pArray.length !== 0 || uArray.length !== 0 || wArray.length !== 0) {
+        while (pArray.length !== 0 || uArray.length !== 0 || wArray.length !== 0|| hArray.length!==0) {
             resultArray.push(pArray.length > 1
                 ? this.getSection1(pArray, wArray, uArray)
                 : this.getSection2(pArray, wArray, uArray));
             resultArray.push(this.getSection2(pArray, wArray, uArray));
-            resultArray.push(pArray.length >= 2
-                ? this.getSection3(pArray, wArray, uArray)
+            resultArray.push(hArray.length >= 2 || pArray.length>=2
+                ? this.getSection3(hArray,pArray)
                 : this.getSection2(pArray, wArray, uArray));
             resultArray.push(this.getSection2(pArray, wArray, uArray));
         }
@@ -186,11 +207,20 @@ class HomePage extends React.Component {
 
         return temp;
     }
-    getSection3(pArray, wArray, uArray) {
-
+    getSection3(hArray,pArray) {
         let temp = [];
-        temp.push(pArray.shift());
-        temp.push(pArray.shift());
+        if(hArray.length>=2){
+            temp.push(hArray.shift());
+            temp.push(hArray.shift());
+        }
+        else if(hArray.length===1 && pArray.length>=2){
+            temp.push(hArray.shift());
+            temp.push(pArray.shift());
+        }
+        else if(hArray.length===0 && pArray.length>=2){
+            temp.push(pArray.shift());
+            temp.push(pArray.shift());
+        }
 
         return temp;
     }
@@ -245,27 +275,24 @@ class HomePage extends React.Component {
         return (
             <div className="main-column">
                 <div className="titleRow" >
-
-
-                        <h1><img className="titleImage" src={mclarenLogo} alt="Logo" />The McLaren Times </h1>
-
-
+                    <img className="titleImage" src={mclarenLogo} alt="Logo" />
+                    <h1>The McLaren Times </h1>
                 </div>
                 <div className="TabRow">
-                    <Tabs
-                        value={this.state.value} onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        centered
-                    >
-                        <Tab  onClick={(e) => this.fetchTopStories()} label="LATEST" />
+                    {/*<Tabs*/}
+                    {/*    value={this.state.value} onChange={this.handleChange}*/}
+                    {/*    indicatorColor="primary"*/}
+                    {/*    textColor="primary"*/}
+                    {/*    centered*/}
+                    {/*>*/}
+                        <Tab className={"tab"} onClick={(e) => this.fetchTopStories()} label="LATEST" />
                         <Tab onClick={(e) => this.fetchNthDayStories(1, e)} label="YESTERDAY" />
                         <Tab  onClick={(e) => this.fetchNthDayStories(2, e)} label={tabNames[2]} />
                         <Tab onClick={(e) => this.fetchNthDayStories(3, e)} label={tabNames[3]} />
                         <Tab onClick={(e) => this.fetchNthDayStories(4, e)} label={tabNames[4]} />
                         <Tab onClick={(e) => this.fetchNthDayStories(5, e)} label={tabNames[5]} />
                         <Tab onClick={(e) => this.fetchNthDayStories(6, e)} label={tabNames[6]} />
-                    </Tabs>
+                    {/*</Tabs>*/}
 
                 </div>
                 {this.state.storiesLoaded?<NewsCardGrid stories={this.state.stories}/>:''}
